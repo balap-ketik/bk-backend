@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/balap_ketik');
+
+const { addOnlinePlayer } = require('../controllers/playerOnline')
+const PlayerOnline = require('../models/playerOnline')
+
 
 /**
  * Module dependencies.
@@ -35,6 +41,19 @@ io.on('connection', function(socket){
   socket.on('player_point',function(data) {
     console.log(data)
     io.emit('get_player_point',data)
+  })
+  socket.on('player_in', function(val) {
+    io.emit('show_online_player', val)
+    console.log('ini val>>>>', val);
+    // // addOnlinePlayer(val)
+    // PlayerOnline.find()
+    // .exec()
+    // .then(list => {
+    //   console.log('<<<< ini IO', io);
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // })
   })
 });
 
