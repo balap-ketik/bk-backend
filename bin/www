@@ -25,7 +25,7 @@ const io = require('socket.io')(server);
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('random_button_player_1',function() {
-    const buttonNumber = Math.floor(Math.random() * 3) + 1  
+    const buttonNumber = Math.floor(Math.random() * 4) + 1  
     io.emit('send_random_button_player_1',buttonNumber)
   })
   socket.on('random_button_player_2',function() {
