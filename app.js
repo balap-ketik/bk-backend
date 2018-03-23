@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-const player = require('./routes/playerOnline')
+const leaderBoard = require('./routes/leaderBoard');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
@@ -15,6 +15,13 @@ mongoose.connect('mongodb://localhost/balap_ketik');
 var app = express();
 
 app.use(cors())
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('connected to db')
+});
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -25,7 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-// app.use('/online', player);
+
+app.use('/leaderboards',leaderBoard)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
