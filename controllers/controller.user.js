@@ -12,8 +12,8 @@ module.exports={
                 User.create({
                     username: req.body.username
                 }).then(newUser=>{
-                    res.status(200).json({
-                        message : 'new user created'
+                    res.status(201).json({
+                        message : 'logged in'
                     })
                 }).catch(err=>res.send(err))
             }
