@@ -14,7 +14,6 @@ describe('API User Sign In',()=>{
         })
         .end((err, res)=>{
             expect(res.body).to.ownProperty('message')
-            expect(res.body).to.ownProperty('dataUser')
             expect(res.body.message).to.be.a('string').eql('logged in')
             done()
         })
