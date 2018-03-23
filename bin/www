@@ -36,6 +36,12 @@ io.on('connection', function(socket){
     console.log(data)
     io.emit('get_player_point',data)
   })
+
+  socket.on('player_in', function(val) {
+    io.emit('show_online_player', val)
+    console.log('ini val>>>>', val);
+  })
+
   socket.on('invite', function(user){
     io.emit('confirmation',user)
   })
