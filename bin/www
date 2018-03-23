@@ -33,13 +33,15 @@ io.on('connection', function(socket){
     io.emit('send_random_button_player_2',buttonNumber)
   })
   socket.on('player_point',function(data) {
-    console.log(data)
     io.emit('get_player_point',data)
+  })
+
+  socket.on('player_ready',function(data) {
+    io.emit('all_player_ready',data)
   })
 
   socket.on('player_in', function(val) {
     io.emit('show_online_player', val)
-    console.log('ini val>>>>', val);
   })
 
   socket.on('invite', function(user){
